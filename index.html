@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>照片展示</title>
+    <title>照片</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,11 +18,15 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: 20px;
             padding: 20px;
         }
-        .gallery a {
+        .gallery-item {
+            position: relative;
             display: inline-block;
+            overflow: visible;
+            display: block;
+            position: relative;
         }
         .gallery img {
             max-width: 100%; /* 确保图片不会超过容器宽度 */
@@ -30,39 +36,210 @@
             box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* 调整阴影颜色 */
             transition: transform 0.3s;
         }
-        .gallery img:hover {
-            transform: scale(2);
+        .gallery-item:hover img {
+            transform: scale(1.8); /* 以相框为基准放大到200% */
+            position: relative;
+            z-index: 99;
+        }
+        .title {
+            position: absolute;
+            left: 50%;
+            top: calc(100% * 1.8 - 32px); /* 上移32px，可根据需要调整 */
+            transform: translateX(-50%);
+            min-width: 120px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            padding: 8px 16px;
+            border-radius: 8px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 100;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-item:hover .title {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
 
-    <h1 style="text-align: center;">画廊</h1>
-    
+    <h1 style="text-align: center;">相册</h1>
     <div class="gallery">
-        <a href="C:\Users\fangj\Desktop\未命名导出\DSC02940.jpg" target="_blank">
-            <img src="C:\Users\fangj\Desktop\未命名导出\DSC02940.jpg" alt="照片1">
-        </a>
-        <a href=photos\IMG20240706164727-已增强-降噪.jpg target="_blank">
-            <img src=photos\IMG20240706164727-已增强-降噪.jpg alt="照片2">
-        </a>
-        <a href="photo3-large.jpg" target="_blank">
-            <img src="photo3.jpg" alt="照片3">
-        </a>
-        <a href="photo4-large.jpg" target="_blank">
-            <img src="photo4.jpg" alt="照片4">
-        </a>
-        <a href="photo4-large.jpg" target="_blank">
-            <img src="photo4.jpg" alt="照片4">
-        </a>
-        <a href="photo4-large.jpg" target="_blank">
-            <img src="photo4.jpg" alt="照片4">
-        </a>
-        <a href="C:\Users\fangj\Desktop\uhdr\output\1_max4.jpeg" target="_blank">
-            <img src="C:\Users\fangj\Desktop\uhdr\output\1_max4.jpeg" alt="照片4">
-        </a>
+        <div class="gallery-item">
+            <a href="photos/20240201_103302.jpg" target="_blank">
+                <img src="photos/20240201_103302.jpg" alt="20240201_103302.jpg">
+            </a>
+            <div class="title">20240201_103302.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/20240221_152448.jpg" target="_blank">
+                <img src="photos/20240221_152448.jpg" alt="20240221_152448.jpg">
+            </a>
+            <div class="title">20240221_152448.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/DSC02644.jpg" target="_blank">
+                <img src="photos/DSC02644.jpg" alt="DSC02644.jpg">
+            </a>
+            <div class="title">DSC02644.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/DSC02672.jpg" target="_blank">
+                <img src="photos/DSC02672.jpg" alt="DSC02672.jpg">
+            </a>
+            <div class="title">DSC02672.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/DSC02703.jpg" target="_blank">
+                <img src="photos/DSC02703.jpg" alt="DSC02703.jpg">
+            </a>
+            <div class="title">DSC02703.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/DSC02788.jpg" target="_blank">
+                <img src="photos/DSC02788.jpg" alt="DSC02788.jpg">
+            </a>
+            <div class="title">DSC02788.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/DSC02889.jpg" target="_blank">
+                <img src="photos/DSC02889.jpg" alt="DSC02889.jpg">
+            </a>
+            <div class="title">DSC02889.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/DSC02895.jpg" target="_blank">
+                <img src="photos/DSC02895.jpg" alt="DSC02895.jpg">
+            </a>
+            <div class="title">DSC02895.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG20240706164727-已增强-降噪.jpg" target="_blank">
+                <img src="photos/IMG20240706164727-已增强-降噪.jpg" alt="IMG20240706164727-已增强-降噪.jpg">
+            </a>
+            <div class="title">IMG20240706164727-已增强-降噪.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG20240724184955.jpg" target="_blank">
+                <img src="photos/IMG20240724184955.jpg" alt="IMG20240724184955.jpg">
+            </a>
+            <div class="title">IMG20240724184955.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG20240728100025.jpg" target="_blank">
+                <img src="photos/IMG20240728100025.jpg" alt="IMG20240728100025.jpg">
+            </a>
+            <div class="title">IMG20240728100025.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG20240820191242.jpg" target="_blank">
+                <img src="photos/IMG20240820191242.jpg" alt="IMG20240820191242.jpg">
+            </a>
+            <div class="title">IMG20240820191242.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG20240823171909.jpg" target="_blank">
+                <img src="photos/IMG20240823171909.jpg" alt="IMG20240823171909.jpg">
+            </a>
+            <div class="title">IMG20240823171909.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG20240824174104.jpg" target="_blank">
+                <img src="photos/IMG20240824174104.jpg" alt="IMG20240824174104.jpg">
+            </a>
+            <div class="title">IMG20240824174104.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG20241002182645.jpg" target="_blank">
+                <img src="photos/IMG20241002182645.jpg" alt="IMG20241002182645.jpg">
+            </a>
+            <div class="title">IMG20241002182645.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG20241004210632.jpg" target="_blank">
+                <img src="photos/IMG20241004210632.jpg" alt="IMG20241004210632.jpg">
+            </a>
+            <div class="title">IMG20241004210632.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG20241005175249 (3).jpg" target="_blank">
+                <img src="photos/IMG20241005175249 (3).jpg" alt="IMG20241005175249 (3).jpg">
+            </a>
+            <div class="title">IMG20241005175249 (3).jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG20241024182558.jpg" target="_blank">
+                <img src="photos/IMG20241024182558.jpg" alt="IMG20241024182558.jpg">
+            </a>
+            <div class="title">IMG20241024182558.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG20241026151235.jpg" target="_blank">
+                <img src="photos/IMG20241026151235.jpg" alt="IMG20241026151235.jpg">
+            </a>
+            <div class="title">IMG20241026151235.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG20241027214700.jpg" target="_blank">
+                <img src="photos/IMG20241027214700.jpg" alt="IMG20241027214700.jpg">
+            </a>
+            <div class="title">IMG20241027214700.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG_20240907_234504.jpg" target="_blank">
+                <img src="photos/IMG_20240907_234504.jpg" alt="IMG_20240907_234504.jpg">
+            </a>
+            <div class="title">IMG_20240907_234504.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG_20240916_215036.jpg" target="_blank">
+                <img src="photos/IMG_20240916_215036.jpg" alt="IMG_20240916_215036.jpg">
+            </a>
+            <div class="title">IMG_20240916_215036.jpg</div>
+        </div>
+        <div class="gallery-item">
+            <a href="photos/IMG_20241015_011917.jpg" target="_blank">
+                <img src="photos/IMG_20241015_011917.jpg" alt="IMG_20241015_011917.jpg">
+            </a>
+            <div class="title">IMG_20241015_011917.jpg</div>
+        </div>
     </div>
+    <script>
+    // 自动提取照片EXIF元数据并显示在标题里
+    document.addEventListener('DOMContentLoaded', function() {
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(function(item) {
+            const img = item.querySelector('img');
+            const titleDiv = item.querySelector('.title');
+            if (img && titleDiv) {
+                img.addEventListener('load', function() {
+                    EXIF.getData(img, function() {
+                        let info = '';
+                        const make = EXIF.getTag(this, 'Make');
+                        const model = EXIF.getTag(this, 'Model');
+                        const fnumber = EXIF.getTag(this, 'FNumber');
+                        const exposure = EXIF.getTag(this, 'ExposureTime');
+                        const iso = EXIF.getTag(this, 'ISOSpeedRatings');
+                        const focal = EXIF.getTag(this, 'FocalLength');
+                        if (make || model) info += `${make || ''} ${model || ''}`.trim();
+                        if (fnumber) info += ` | 光圈: f/${fnumber}`;
+                        if (exposure) info += ` | 快门: ${exposure}s`;
+                        if (iso) info += ` | ISO: ${iso}`;
+                        if (focal) info += ` | 焦距: ${focal}mm`;
+                        if (info) {
+                            // 原标题内容
+                            const baseTitle = titleDiv.textContent.split('\n')[0];
+                            titleDiv.textContent = baseTitle + '\n' + info;
+                        }
+                    });
+                });
+            }
+        });
+    });
+    </script>
 
 </body>
 </html>
+
 
